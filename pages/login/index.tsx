@@ -1,24 +1,10 @@
-import Image from 'next/image'
-
-import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik'
-import * as yup from 'yup'
 import { useState } from 'react'
+import Image from 'next/image'
+import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik'
 
-interface Login {
-  email: string;
-  password: string;
-}
+import { LoginForm } from '@/lib/interfaces/LoginInterface'
+import { LoginSchema } from '@/lib/schemas/LoginValidation'
 
-const LoginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Debe ser un correo válido')
-    .required('El correo es requerido'),
-  password: yup
-    .string()
-    .min(8, 'Debe contener al menos 8 caracteres')
-    .required('La contraseña es requerida')
-})
 
 export default function Login() {
   const [message, setMessage] = useState('')
@@ -46,8 +32,8 @@ export default function Login() {
               }}
               onSubmit={
                 (
-                  values: Login,
-                  {setSubmitting}: FormikHelpers<Login>
+                  values: LoginForm,
+                  {setSubmitting}: FormikHelpers<LoginForm>
                 ) => {
                   console.log(values)
                   setSubmitting(false)
@@ -74,7 +60,9 @@ export default function Login() {
                         name="email"
                         placeholder="correo@empresa.com"
                         className='bg-slate-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-200 focus:border-slate-200 block w-full p-2.5'/>
-                      <ErrorMessage name='email'/>
+                      <ErrorMessage 
+                        name='email' 
+                        render={msg => <div className='text-red-500 text-sm pt-1'>{msg}</div>}/>
                     </div>
                     <div>
                       <label 
@@ -87,7 +75,9 @@ export default function Login() {
                         name="password"
                         placeholder="superSecret"
                         className='bg-slate-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-200 focus:border-slate-200 block w-full p-2.5'/>
-                      <ErrorMessage name='password'/>
+                      <ErrorMessage 
+                        name='password'
+                        render={msg => <div className='text-red-500 text-sm pt-1'>{msg}</div>}/>
                     </div>
                     <button
                       type='submit'
