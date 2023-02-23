@@ -8,7 +8,6 @@ import { LoginSchema } from '@/lib/schemas/LoginValidation'
 
 export default function Login() {
   const [message, setMessage] = useState('')
-  const [submitted, setSubmitted] = useState(false)
 
   return (
     <>
@@ -31,23 +30,41 @@ export default function Login() {
                 password: ''
               }}
               onSubmit={
-                (
+                async (
                   values: LoginForm,
                   {setSubmitting}: FormikHelpers<LoginForm>
                 ) => {
-                  console.log(values)
-                  setSubmitting(false)
-                  setMessage('Inicio de sesión exitoso')
-                  setSubmitted(true)
+                  setMessage('')
+                  try {
+                    const res = await fetch(
+                      'https://mapi.paycode.com.mx/api/challenge/login',
+                      {
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        method: 'POST',
+                        body: JSON.stringify(values)
+                      }
+                    )
+                    setSubmitting(false)
+
+                    if (res.ok) {
+                      const data = await res.json()
+                    } else {
+                      setMessage('Ingrese credenciales válidas')
+                    }
+                  } catch (err) {
+                    console.log(err)
+                  }
               }}
               validationSchema={LoginSchema}>
                 {({errors, touched, isSubmitting}) => (
                   <Form className='space-y-4 md:space-y-6'>
                     <div 
-                      hidden={!submitted} 
-                      className="bg-green-200 border-l-4 border-green-400 p-3" 
+                      hidden={!message} 
+                      className="bg-red-200 border-l-4 border-red-400 p-3" 
                       role="alert">
-                      <p className='font-bold text-green-700'>{message}</p>
+                      <p className='font-bold text-red-700'>{message}</p>
                     </div>
                     <div>
                       <label 
@@ -73,6 +90,7 @@ export default function Login() {
                       <Field 
                         id="password"
                         name="password"
+                        type="password"
                         placeholder="superSecret"
                         className='bg-slate-200 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-200 focus:border-slate-200 block w-full p-2.5'/>
                       <ErrorMessage 
