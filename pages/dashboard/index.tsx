@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next"
 import { URL_BASE } from "@/lib/consts/api"
 import { IProfile } from "@/lib/interfaces/Profile"
 import { IReport } from "@/lib/interfaces/Report"
-import DetailCard from "@/components/Form/Cards/DetailCard"
+import DetailCard from "@/components/Cards/DetailCard"
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<IProfile>({})
@@ -46,24 +46,33 @@ export default function Dashboard() {
           <div className="w-full p-2">
             <div className="flex flex-row">
               <div className="w-full md:w-1/2">
-
+                <DetailCard
+                  title='Ingresos'
+                  value={`$${report.revenuePerHour?.reduce((a,b) => a + b)}`}
+                  valueType='cash'
+                  percentage=''>
+                    <div>Another Component</div>
+                </DetailCard>
               </div>
               <div className="w-full md:w-1/2 flex flex-col">
                 <DetailCard
                   title='Ticket promedio'
                   value={`$${report.averageTicket}`}
                   valueType='cash'
-                  percentage='10%'/>
+                  percentage='10%'>
+                </DetailCard>
                 <DetailCard
                   title='Ticket tope'
                   value={`$${report.topTicket}`}
                   valueType='cash'
-                  percentage=''/>
+                  percentage=''>
+                </DetailCard>
                 <DetailCard
                   title='Método de pago más usado'
                   value={`${report.topPaymentMethod}`}
                   valueType='text'
-                  percentage=''/>
+                  percentage=''>
+                </DetailCard>
               </div>
             </div>
           </div>
