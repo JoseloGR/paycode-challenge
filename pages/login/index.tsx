@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik'
+import { setCookie } from 'cookies-next'
 
 import { LoginForm } from '@/lib/interfaces/LoginInterface'
 import { LoginSchema } from '@/lib/schemas/LoginValidation'
@@ -8,6 +10,7 @@ import { LoginSchema } from '@/lib/schemas/LoginValidation'
 
 export default function Login() {
   const [message, setMessage] = useState('')
+  const router = useRouter()
 
   return (
     <>
@@ -50,15 +53,17 @@ export default function Login() {
 
                     if (res.ok) {
                       const data = await res.json()
+                      setCookie('session', data['token'], {maxAge: 60 * 10})
+                      router.push('/')
                     } else {
                       setMessage('Ingrese credenciales válidas')
                     }
                   } catch (err) {
-                    console.log(err)
+                    setMessage('Ha ocurrido un error con el servicio. Intente de nuevo por favor')
                   }
               }}
               validationSchema={LoginSchema}>
-                {({errors, touched, isSubmitting}) => (
+                {({errors, touched, isSubmitting, isValid}) => (
                   <Form className='space-y-4 md:space-y-6'>
                     <div 
                       hidden={!message} 
@@ -99,8 +104,8 @@ export default function Login() {
                     </div>
                     <button
                       type='submit'
-                      className='w-full text-white bg-slate-800 hover:bg-slate-900 focus:ring-4 focus:outline-none focus:ring-slate-900 font-medium font-bold rounded-lg text-sm px-5 py-2.5 text-center'
-                      disabled={isSubmitting}>
+                      className='w-full text-white bg-slate-800 hover:bg-slate-900 focus:ring-4 focus:outline-none focus:ring-slate-900 font-medium font-bold rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-slate-500'
+                      disabled={isSubmitting || !isValid}>
                       Login
                     </button>
                   </Form>
