@@ -40,10 +40,10 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto my-4 p-4">
         <div className="flex flex-col">
-          <div className="w-full p-2">Bienvenido {profile.name}</div>
-          <div className="w-full p-2">Reporte de Hoy</div>
+          <div className="w-full p-2 text-2xl font-semibold text-slate-800 mb-2">Bienvenido {profile.name}</div>
+          <div className="w-full p-2 text-lg font-semibold text-slate-500">Reporte de <span className="text-slate-700">Hoy</span></div>
           <div className="w-full p-2">
             <div className="flex flex-row">
               <div className="w-full md:w-1/2">

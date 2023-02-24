@@ -9,8 +9,8 @@ export default function DetailCard(props: {
 }) {
   return (
     <div className="block max-w-sm rounded-log bg-white p-4 shadow-lg mb-4">
-      <h6 className="flex justify-between">
-        <div className="text-base text-neutral-600 text-sm">
+      <h6 className="flex justify-between mb-1">
+        <div className="text-slate-500 text-sm font-medium">
           {props.title}
         </div>
         {props.percentage &&
@@ -20,10 +20,10 @@ export default function DetailCard(props: {
         }
       </h6>
       <h5 className="leading-tight text-neutral-800">
-        <span className="text-2xl font-bold ">
+        <span className="text-2xl font-bold">
           {props.value}
         </span>
-        {props.valueType == 'cash' && <small> MXN</small>}
+        {props.valueType == 'cash' && <small className="text-slate-500 font-semibold"> MXN</small>}
       </h5>
       {props.children}
     </div>
