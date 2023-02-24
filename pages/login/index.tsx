@@ -54,7 +54,7 @@ export default function Login() {
                     if (res.ok) {
                       const data = await res.json()
                       setCookie('session', data['token'], {maxAge: 60 * 10})
-                      router.push('/')
+                      router.push('/dashboard')
                     } else {
                       setMessage('Ingrese credenciales válidas')
                     }
