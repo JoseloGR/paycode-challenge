@@ -5,6 +5,7 @@ import { URL_BASE } from "@/lib/consts/api"
 import { IProfile } from "@/lib/interfaces/Profile"
 import { IReport } from "@/lib/interfaces/Report"
 import DetailCard from "@/components/Cards/DetailCard"
+import CustomLineChart from "@/components/Charts/CustomLineChart"
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<IProfile>({})
@@ -51,7 +52,7 @@ export default function Dashboard() {
                   value={`$${report.revenuePerHour?.reduce((a,b) => a + b)}`}
                   valueType='cash'
                   percentage=''>
-                    <div>Another Component</div>
+                    <CustomLineChart data={report.revenuePerHour}/>
                 </DetailCard>
               </div>
               <div className="w-full md:w-1/2 flex flex-col">
