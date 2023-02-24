@@ -6,6 +6,7 @@ import { setCookie } from 'cookies-next'
 
 import { LoginForm } from '@/lib/interfaces/LoginInterface'
 import { LoginSchema } from '@/lib/schemas/LoginValidation'
+import { URL_BASE } from '@/lib/consts/api'
 
 
 export default function Login() {
@@ -40,7 +41,7 @@ export default function Login() {
                   setMessage('')
                   try {
                     const res = await fetch(
-                      'https://mapi.paycode.com.mx/api/challenge/login',
+                      `${URL_BASE}/login`,
                       {
                         headers: {
                           'Content-Type': 'application/json'
