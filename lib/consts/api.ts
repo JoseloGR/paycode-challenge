@@ -1,0 +1,1 @@
+export const URL_BASE = 'https://mapi.paycode.com.mx/api/challenge'
