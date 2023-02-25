@@ -6,6 +6,7 @@ import { IProfile } from "@/lib/interfaces/Profile"
 import { IReport } from "@/lib/interfaces/Report"
 import DetailCard from "@/components/Cards/DetailCard"
 import CustomLineChart from "@/components/Charts/CustomLineChart"
+import currencyFormat from "@/lib/utils/format"
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<IProfile>({})
@@ -49,7 +50,7 @@ export default function Dashboard() {
               <div className="w-full md:w-1/2">
                 <DetailCard
                   title='Ingresos'
-                  value={`$${report.revenuePerHour?.reduce((a,b) => a + b)}`}
+                  value={currencyFormat(report.revenuePerHour?.reduce((a,b) => a + b))}
                   valueType='cash'
                   percentage=''>
                     <CustomLineChart data={report.revenuePerHour}/>
@@ -58,13 +59,13 @@ export default function Dashboard() {
               <div className="w-full md:w-1/2 flex flex-col">
                 <DetailCard
                   title='Ticket promedio'
-                  value={`$${report.averageTicket}`}
+                  value={currencyFormat(report.averageTicket)}
                   valueType='cash'
                   percentage='10%'>
                 </DetailCard>
                 <DetailCard
                   title='Ticket tope'
-                  value={`$${report.topTicket}`}
+                  value={currencyFormat(report.topTicket)}
                   valueType='cash'
                   percentage=''>
                 </DetailCard>
