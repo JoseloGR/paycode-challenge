@@ -15,8 +15,7 @@ export default function DetailCard(props: {
         </div>
         {props.percentage &&
           <CustomBadge
-            percentage={props.percentage}
-            increment={true}/>
+            percentage={props.percentage}/>
         }
       </h6>
       <h5 className="leading-tight text-neutral-800">

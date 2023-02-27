@@ -7,6 +7,7 @@ import { IReport } from "@/lib/interfaces/Report"
 import DetailCard from "@/components/Cards/DetailCard"
 import CustomLineChart from "@/components/Charts/CustomLineChart"
 import currencyFormat from "@/lib/utils/format"
+import computePercentage from "@/lib/utils/percentage"
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<IProfile>({})
@@ -61,13 +62,13 @@ export default function Dashboard() {
                   title='Ticket promedio'
                   value={currencyFormat(report.averageTicket)}
                   valueType='cash'
-                  percentage='10%'>
+                  percentage={computePercentage(report.previousDay?.averageTicket, report.averageTicket)}>
                 </DetailCard>
                 <DetailCard
                   title='Ticket tope'
                   value={currencyFormat(report.topTicket)}
                   valueType='cash'
-                  percentage=''>
+                  percentage={computePercentage(report.previousDay?.topTicket, report.topTicket)}>
                 </DetailCard>
                 <DetailCard
                   title='Método de pago más usado'
