@@ -32,7 +32,7 @@ export const options = {
     },
     tooltip: {
       callbacks: {
-        label: function(context: { dataset: { label: string; }; parsed: { y: number | null | undefined; }; }) {
+        label: function(context: any) {
           let label = context.dataset.label || '';
           if(label) {label += ': '}
           if (context.parsed.y !== null) {
