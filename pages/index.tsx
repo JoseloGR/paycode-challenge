@@ -15,7 +15,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Link href="/dashboard">Ir a Dashboard</Link>
+        <h1 className='text-2xl'>PayCode Challenge</h1>
+        <Link href="/dashboard" className='text-xl font-bold'>Ir a Dashboard</Link>
       </main>
     </>
   )
