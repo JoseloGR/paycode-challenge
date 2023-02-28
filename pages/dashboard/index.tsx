@@ -8,6 +8,8 @@ import DetailCard from "@/components/Cards/DetailCard"
 import CustomLineChart from "@/components/Charts/CustomLineChart"
 import currencyFormat from "@/lib/utils/format"
 import computePercentage from "@/lib/utils/percentage"
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<IProfile>({})
@@ -32,7 +34,9 @@ export default function Dashboard() {
     ]).then(responses => {
       setProfile(responses[0])
       setReport(responses[1])
-    }).catch((error) => {})
+    }).catch((error) => {
+      toast.error(`${error.message}`)
+    })
   }
 
   useEffect(() => {
@@ -48,6 +52,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="container mx-auto my-4 p-4">
+        <ToastContainer/>
         <div className="flex flex-col">
           <div className="w-full p-2 text-2xl font-semibold text-slate-800 mb-2 flex justify-between">
             Bienvenido {profile.name}
@@ -88,7 +93,7 @@ export default function Dashboard() {
               </DetailCard>
               <DetailCard
                 title='Método de pago más usado'
-                value={`${report.topPaymentMethod}`}
+                value={`${report.topPaymentMethod || ''}`}
                 valueType='text'
                 percentage=''>
               </DetailCard>

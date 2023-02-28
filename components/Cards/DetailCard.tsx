@@ -20,7 +20,7 @@ export default function DetailCard(props: {
       </h6>
       <h5 className="leading-tight text-neutral-800">
         <span className="text-2xl font-bold">
-          {props.value || ''}
+          {props.value}
         </span>
         {props.valueType == 'cash' && <small className="text-slate-500 font-semibold"> MXN</small>}
       </h5>
