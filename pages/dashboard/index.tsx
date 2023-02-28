@@ -63,37 +63,35 @@ export default function Dashboard() {
             </button>
           </div>
           <div className="w-full p-2 text-lg font-semibold text-slate-500">Reporte de <span className="text-slate-700">Hoy</span></div>
-          <div className="w-full p-2">
-            <div className="flex flex-row">
-              <div className="w-full md:w-1/2">
-                <DetailCard
-                  title='Ingresos'
-                  value={currencyFormat(report.revenuePerHour?.reduce((a,b) => a + b))}
-                  valueType='cash'
-                  percentage=''>
-                    <CustomLineChart data={report.revenuePerHour}/>
-                </DetailCard>
-              </div>
-              <div className="w-full md:w-1/2 flex flex-col">
-                <DetailCard
-                  title='Ticket promedio'
-                  value={currencyFormat(report.averageTicket)}
-                  valueType='cash'
-                  percentage={computePercentage(report.previousDay?.averageTicket, report.averageTicket)}>
-                </DetailCard>
-                <DetailCard
-                  title='Ticket tope'
-                  value={currencyFormat(report.topTicket)}
-                  valueType='cash'
-                  percentage={computePercentage(report.previousDay?.topTicket, report.topTicket)}>
-                </DetailCard>
-                <DetailCard
-                  title='Método de pago más usado'
-                  value={`${report.topPaymentMethod}`}
-                  valueType='text'
-                  percentage=''>
-                </DetailCard>
-              </div>
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-1/2 p-2">
+              <DetailCard
+                title='Ingresos'
+                value={currencyFormat(report.revenuePerHour?.reduce((a,b) => a + b))}
+                valueType='cash'
+                percentage=''>
+                  <CustomLineChart data={report.revenuePerHour}/>
+              </DetailCard>
+            </div>
+            <div className="w-full md:w-1/2 flex flex-col p-2">
+              <DetailCard
+                title='Ticket promedio'
+                value={currencyFormat(report.averageTicket)}
+                valueType='cash'
+                percentage={computePercentage(report.previousDay?.averageTicket, report.averageTicket)}>
+              </DetailCard>
+              <DetailCard
+                title='Ticket tope'
+                value={currencyFormat(report.topTicket)}
+                valueType='cash'
+                percentage={computePercentage(report.previousDay?.topTicket, report.topTicket)}>
+              </DetailCard>
+              <DetailCard
+                title='Método de pago más usado'
+                value={`${report.topPaymentMethod}`}
+                valueType='text'
+                percentage=''>
+              </DetailCard>
             </div>
           </div>
         </div>

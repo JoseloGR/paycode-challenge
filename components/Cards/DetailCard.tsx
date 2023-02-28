@@ -8,7 +8,7 @@ export default function DetailCard(props: {
   children: any
 }) {
   return (
-    <div className="block max-w-sm rounded-log bg-white p-4 shadow-lg mb-4">
+    <div className="block max-w-full rounded-md bg-white p-4 shadow-lg mb-4">
       <h6 className="flex justify-between mb-1">
         <div className="text-slate-500 text-sm font-medium">
           {props.title}
